@@ -1,10 +1,10 @@
 package com.pluralsight;
 
 public class Room {
-    private int numberOfBeds;
-    private double price;
-    private boolean occupied;
-    private boolean dirty;
+    private final int numberOfBeds;
+    private final double price;
+    private final boolean occupied;
+    private final boolean dirty;
 
     public Room(int numberOfBeds, double price, boolean occupied, boolean dirty) {
         this.numberOfBeds = numberOfBeds;
