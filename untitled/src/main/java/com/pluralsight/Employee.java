@@ -1,7 +1,7 @@
 package com.pluralsight;
 
 public class Employee {
-    private String employeeId;
+    private final String employeeId;
     private String name;
     private String department;
     private double payRate;
