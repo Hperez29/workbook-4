@@ -1,6 +1,6 @@
 package com.pluralsight;
 
-public class Main {
+public class Hotel {
     public static void main(String[] args) {
         // === Room behavior test ===
         Room room = new Room(2, 150.0, false, false);
