@@ -14,18 +14,19 @@ public class Hand {
         this.cards.add(card);
     }
 
+    public ArrayList<Card> getCards() {
+        return this.cards;
+    }
+
     public int getSize(){
         return this.cards.size();
     }
 
     public int getValue(){
         int total = 0;
-        for (Card c:this.cards){
+        for (Card c : this.cards) {
             total += c.getPointValue();
         }
         return total;
     }
-
 }
-
-

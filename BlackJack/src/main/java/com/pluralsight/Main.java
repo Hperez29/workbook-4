@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     // ANSI color codes
     public static final String RESET = "\033[0m";
@@ -9,31 +12,47 @@ public class Main {
     public static final String BLUE = "\033[0;34m";
 
     public static void main(String[] args) {
-        Deck d = new Deck();
-        d.shuffle();
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Hand> hands = new ArrayList<>();
+        ArrayList<String> playerNames = new ArrayList<>();
 
-        Hand h1 = new Hand();
+        System.out.print("Enter the number of players: ");
+        int numPlayers = Integer.parseInt(scanner.nextLine());
 
-        Card c1 = d.deal();
-        c1.flip();
+        for (int i = 0; i < numPlayers; i++) {
+            System.out.print("Enter the name of player " + (i + 1) + ": ");
+            String name = scanner.nextLine();
+            playerNames.add(name);
+            hands.add(new Hand());
+        }
 
-        displayCard(c1);
+        Deck deck = new Deck();
+        deck.shuffle();
 
-        Card c2 = d.deal();
-        c2.flip();
+        // Deal two cards to each player
+        for (Hand hand : hands) {
+            hand.deal(deck.deal());
+            hand.deal(deck.deal());
+        }
 
-        displayCard(c2);
+        // Display hands and scores
+        for (int i = 0; i < hands.size(); i++) {
+            String playerName = playerNames.get(i);
+            Hand hand = hands.get(i);
+            System.out.println(GREEN + playerName + "'s Hand:" + RESET);
+            displayHand(hand);
+        }
 
-        h1.deal(c1);
-        h1.deal(c2);
-
-        System.out.println();
-        System.out.println(GREEN + "Hand Value: " + h1.getValue() + RESET);
+        // Future implementation for determining winner, hit/stay logic, and Ace value adjustment
+        System.out.println("Game setup complete. Next steps: Implement hit/stay logic and scoring adjustments.");
     }
 
-    public static void displayCard(Card c) {
-        System.out.println(YELLOW + "Suit: " + c.getSuit() + RESET);
-        System.out.println(BLUE + "Value: " + c.getValue() + RESET);
-        System.out.println(RED + "Point Value: " + c.getPointValue() + RESET);
+    public static void displayHand(Hand hand) {
+        for (Card c : hand.getCards()) {
+            System.out.println(YELLOW + "Suit: " + c.getSuit() + RESET);
+            System.out.println(BLUE + "Value: " + c.getValue() + RESET);
+            System.out.println(RED + "Point Value: " + c.getPointValue() + RESET);
+        }
+        System.out.println(GREEN + "Total Value: " + hand.getValue() + RESET);
     }
 }
