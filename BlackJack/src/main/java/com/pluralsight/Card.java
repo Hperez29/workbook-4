@@ -22,7 +22,7 @@ public class Card {
             return this.suit;
         }
         else{
-            return "#";
+            return "\"Hearts\",\"Spades\",\"Diamonds\",\"Clubs\"";
         }
     }
 

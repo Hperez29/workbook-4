@@ -35,16 +35,44 @@ public class Main {
             hand.deal(deck.deal());
         }
 
-        // Display hands and scores
+        // Hit/Stay logic
         for (int i = 0; i < hands.size(); i++) {
             String playerName = playerNames.get(i);
             Hand hand = hands.get(i);
-            System.out.println(GREEN + playerName + "'s Hand:" + RESET);
-            displayHand(hand);
+            System.out.println(GREEN + playerName + "'s Turn:" + RESET);
+            while (hand.getValue() < 21) {
+                displayHand(hand);
+                System.out.print("Hit or Stay? (H/S): ");
+                String choice = scanner.nextLine().toUpperCase();
+                if (choice.equals("H")) {
+                    hand.deal(deck.deal());
+                } else if (choice.equals("S")) {
+                    break;
+                }
+            }
+
+            if (hand.getValue() > 21) {
+                System.out.println(RED + playerName + " has busted!" + RESET);
+            }
         }
 
-        // Future implementation for determining winner, hit/stay logic, and Ace value adjustment
-        System.out.println("Game setup complete. Next steps: Implement hit/stay logic and scoring adjustments.");
+        // Determine winner
+        int highestValue = 0;
+        String winner = "";
+
+        for (int i = 0; i < hands.size(); i++) {
+            int handValue = hands.get(i).getValue();
+            if (handValue > highestValue && handValue <= 21) {
+                highestValue = handValue;
+                winner = playerNames.get(i);
+            }
+        }
+
+        if (winner.isEmpty()) {
+            System.out.println("No winner, all players busted.");
+        } else {
+            System.out.println(GREEN + winner + " wins with a total value of " + highestValue + "!" + RESET);
+        }
     }
 
     public static void displayHand(Hand hand) {
