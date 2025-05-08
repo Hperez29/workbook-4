@@ -2,7 +2,6 @@ package com.pluralsight;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.Callable;
 
 public class Deck {
 
