@@ -29,13 +29,11 @@ public class Main {
         Deck deck = new Deck();
         deck.shuffle();
 
-        // Deal two cards to each player
         for (Hand hand : hands) {
             hand.deal(deck.deal());
             hand.deal(deck.deal());
         }
 
-        // Hit/Stay logic
         for (int i = 0; i < hands.size(); i++) {
             String playerName = playerNames.get(i);
             Hand hand = hands.get(i);
@@ -56,7 +54,6 @@ public class Main {
             }
         }
 
-        // Determine winner
         int highestValue = 0;
         String winner = "";
 
@@ -77,10 +74,14 @@ public class Main {
 
     public static void displayHand(Hand hand) {
         for (Card c : hand.getCards()) {
-            System.out.println(YELLOW + "Suit: " + c.getSuit() + RESET);
-            System.out.println(BLUE + "Value: " + c.getValue() + RESET);
-            System.out.println(RED + "Point Value: " + c.getPointValue() + RESET);
+            displayCard(c);
         }
         System.out.println(GREEN + "Total Value: " + hand.getValue() + RESET);
+    }
+
+    public static void displayCard(Card card) {
+        System.out.println(YELLOW + "Suit: " + card.getSuit() + RESET);
+        System.out.println(BLUE + "Value: " + card.getValue() + RESET);
+        System.out.println(RED + "Point Value: " + card.getPointValue() + RESET);
     }
 }

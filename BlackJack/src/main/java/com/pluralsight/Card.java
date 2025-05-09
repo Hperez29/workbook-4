@@ -6,33 +6,25 @@ public class Card {
     private String value;
     private boolean isfaceUp;
 
-    public Card(String suit, String value){
+    public Card(String suit, String value) {
         this.suit = suit;
         this.value = value;
-        this.isfaceUp = false;
+        this.isfaceUp = true;  // Cards are face up by default
     }
 
-    public String getValue(){
-
+    public String getValue() {
         return this.value;
     }
 
-    public String getSuit(){
-        if(isfaceUp){
+    public String getSuit() {
+        if (isfaceUp) {
             return this.suit;
-        }
-        else{
-            return "\"Hearts\",\"Spades\",\"Diamonds\",\"Clubs\"";
+        } else {
+            return "#";
         }
     }
 
     public int getPointValue() {
-        // only return the value if the card is face up
-        // determine point value and return it
-        // A = 11
-        // K, Q, J = 10
-        // all numeric cards are equal to their face value
-
         switch (this.value) {
             case "A":
                 return 11;
@@ -53,25 +45,27 @@ public class Card {
             case "9":
                 return 9;
             case "10":
-                return 10;
             case "J":
-                return 10;
             case "Q":
-                return 10;
             case "K":
                 return 10;
         }
-
-
         return 0;
     }
 
-    public boolean isFaceup(){
+    public boolean isFaceUp() {
         return this.isfaceUp;
     }
 
-    public boolean flip(){
+    public void flip() {
         this.isfaceUp = !this.isfaceUp;
-        return this.isfaceUp;
+    }
+
+    public void reveal() {
+        this.isfaceUp = true;
+    }
+
+    public void hide() {
+        this.isfaceUp = false;
     }
 }
